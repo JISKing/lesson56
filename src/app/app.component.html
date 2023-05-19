@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <form [formGroup]="validForm" (ngSubmit)="onSubmit()">
+        <div class="form-item">
+            <label for="login">Login</label>
+            <input placeholder="Your Login..." formControlName="login" >
+            <div *ngIf="validForm.get('login')?.invalid && (validForm.get('login')?.dirty || validForm.get('login')?.touched)" >
+              <div *ngIf="validForm.get('login')?.hasError('required')" class="error-text">Login is required.</div>
+              <div *ngIf="validForm.get('login')?.hasError('pattern')" class="error-text">
+                  Login should contain only letters and numbers without spaces.
+              </div>
+            </div> 
+        </div>
+  
+        <div class="form-item">
+            <label for="email">Email</label>
+            <input id="email" placeholder="Your email..." formControlName="email">
+            <div *ngIf="validForm.get('email')?.invalid && (validForm.get('email')?.dirty || validForm.get('email')?.touched)">
+              <div *ngIf="validForm.get('email')?.hasError('required')" class="error-text">Email is required</div>
+              <div *ngIf="validForm.get('email')?.hasError('email')" class="error-text">
+                  Invalid email format.
+              </div>
+              <div *ngIf="validForm.get('email')?.hasError('emailExists')" class="error-text">This email address already exists.</div>
+            </div>
+        </div>
+  
+        <div class="form-item">
+          <label for="password">Password</label>
+          <input id="password" placeholder="Your password..." formControlName="password">
+          <div *ngIf="validForm.get('password')?.invalid && (validForm.get('password')?.dirty || validForm.get('password')?.touched)">
+              <div *ngIf="validForm.get('password')?.hasError('required')" class="error-text">Password is required.</div>
+              <div *ngIf="validForm.get('password')?.hasError('minlength')" class="error-text">
+                  Password shuold be at least 7 characters long.
+              </div>
+              <div class="error-text">{{passwordLength}} characters entered</div>
+          </div>
+      </div>
+        <button type="submit">Submit</button>
+    </form> 
+  </div>
